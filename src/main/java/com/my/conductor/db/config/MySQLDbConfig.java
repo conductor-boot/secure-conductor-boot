@@ -22,6 +22,9 @@ public class MySQLDbConfig {
                           @Value("${spring.datasource.url:jdbc:mysql://localhost:3306/oauth?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false}") String datasourceUrl,
                           @Value("${spring.datasource.driver-class-name:com.mysql.cj.jdbc.Driver}") String datasourceDriver){
         
+		System.setProperty("jdbc.url", datasourceUrl);
+	    System.setProperty("jdbc.username", datasourceUsername);
+	    System.setProperty("jdbc.password", datasourcePassword);
 
         return DataSourceBuilder
                 .create()
