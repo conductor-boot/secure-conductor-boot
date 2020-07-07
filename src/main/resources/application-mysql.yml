@@ -10,15 +10,14 @@ server:
 # The alias mapped to the certificate
     key-alias: my
     enabled: false
-    
+
 spring:
   application:
     name: conductor-boot-wrapper-secure
   datasource:
-    name: conductor
-    url: ${jdbc.url}
-    username: ${jdbc.username}
-    password: ${jdbc.password} 
+    url: jdbc:mysql://mysql_db:3306/conductor?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false
+    username: conductor
+    password: conductor
     driver-class-name: com.mysql.cj.jdbc.Driver
     tomcat:
       test-while-idle: true
@@ -53,9 +52,9 @@ logbook:
 ## Conductor MYSQL Configuration for Hikari DataSource
 db: mysql
 jdbc:
-  url: jdbc:mysql://localhost:3306/conductor?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false 
-  username: Conductor
-  password: Conductor!23$
+  url: jdbc:mysql://mysql_db:3306/conductor?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false
+  username: conductor
+  password: conductor
 conductor:
   jetty:
     server:
@@ -64,12 +63,12 @@ conductor:
     connection:
       timeout: 18000000
       idle:
-        timeout: 31536000 
+        timeout: 31536000
       pool:
         idle:
           min: 2
         size:
-          max: 10000
+          max: 1000
 
 zuul:
   add-proxy-headers: true
