@@ -45,7 +45,7 @@ logbook:
     chunk-size: 10000
   format:
     style: splunk
-  exclude: [/conductor/api/swagger-ui**,/v3/api-docs/**,/actuator/**, /swagger-ui/**]
+  exclude: [/actuator/**, /v3/api-docs/**, /swagger-ui/**, /index.html, /images/**, /swagger-ui.js, /lib/**, /css/**]
   strategy: body-only-if-status-at-least
   minimum-status: 400
 
@@ -71,6 +71,7 @@ conductor:
 zuul:
   add-proxy-headers: true
   add-host-header: true
+  ssl-hostname-validation-enabled: false
   sensitive-headers:
   - Authorization
   routes:
@@ -85,6 +86,11 @@ zuul:
       strip-prefix: false
     conductor-swagger-json:
       path: /api/swagger.json
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+    conductor-swagger-images:
+      path: /images/**
       url: http://localhost:${conductor.jetty.server.port}
       retryable: true
       strip-prefix: false

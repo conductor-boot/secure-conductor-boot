@@ -51,6 +51,7 @@ public class SecureConductorBoot {
 			ConductorRunnerThreadProvider conductorRunnerThread = ConductorRunnerThreadProvider.getInstance();
 			
 			conductorRunnerThread.configureArgs(args_buffer);
+			conductorRunnerThread.setRunToTrue();
 			conductorRunnerThread.start();  
 		}
 	}

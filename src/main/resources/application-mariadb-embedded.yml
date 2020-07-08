@@ -111,6 +111,11 @@ zuul:
       url: http://localhost:${conductor.jetty.server.port}
       retryable: true
       strip-prefix: false
+    conductor-swagger-images:
+      path: /images/**
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
     conductor-swagger-lib:
       path: /lib/**
       url: http://localhost:${conductor.jetty.server.port}
