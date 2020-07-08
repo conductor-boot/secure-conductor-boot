@@ -6,7 +6,7 @@ spring:
      - logbook
      - mariadb-embedded
      - conductor
-     - ports-override
+     - ports
      - zuul
      - security
   application:
