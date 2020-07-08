@@ -1,0 +1,10 @@
+server:
+  port: 8081
+  
+mariadb4j:
+  port: 3307
+
+conductor:
+  jetty:
+    server:
+      port: 1988

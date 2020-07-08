@@ -1,3 +1,20 @@
 spring:
   profiles:
-    active: mariadb-embedded
+    active: 
+     - default
+     - database-default
+     - logbook
+     - mariadb-embedded
+     - conductor
+     - ports-override
+     - zuul
+     - security
+  application:
+    name: conductor-boot-wrapper-secure
+
+server:
+  port: 8080
+  use-forward-headers: true
+
+check-user-scopes: true
+awaitTermination: 3000
