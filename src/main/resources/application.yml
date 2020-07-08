@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
   use-forward-headers: true
   ssl:
     key-store-type: PKCS12
@@ -15,9 +15,9 @@ spring:
   application:
     name: conductor-boot-wrapper-secure
   datasource:
-    name: conductor
-    username: Conductor
-    password: Conductor!23$
+    url: jdbc:mysql://localhost:3306/conductor?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false
+    username: conductor
+    password: conductor
     driver-class-name: com.mysql.cj.jdbc.Driver
     tomcat:
       test-while-idle: true
@@ -35,26 +35,7 @@ spring:
 check-user-scopes: true
 awaitTermination: 3000
 
-wrapper_db: mariadb4j
-
-mariadb4j:
-  database:
-    name: ${spring.datasource.name}
-  port: 3306
-  dataDir: ${spring.application.name}-data
-  libDir: ${spring.application.name}-lib
-  baseDir: ${spring.application.name}-base
-#  dataDir: /appln/db/${spring.application.name}-data
-#  libDir: /appln/db/${spring.application.name}-lib
-#  baseDir: /appln/db/${spring.application.name}-base
-  maxConnections: 100000
-  wait: 
-    timeout: 18000000
-  connect:
-    timeout: 31536000
-  deleteBaseAndDataDirOnShutdown: false
-  security:
-    disabled: true
+wrapper_db: mysql
 
 logbook:
   filter:
@@ -64,34 +45,34 @@ logbook:
     chunk-size: 10000
   format:
     style: splunk
-  exclude: [/actuator/**, /v3/api-docs/**, /swagger-ui/**, /index.html]
+  exclude: [/conductor/api/swagger-ui**,/v3/api-docs/**,/actuator/**, /swagger-ui/**]
   strategy: body-only-if-status-at-least
   minimum-status: 400
 
 ## Conductor MYSQL Configuration for Hikari DataSource
 db: mysql
 jdbc:
-  username: ${spring.datasource.username}
-  password: ${spring.datasource.password}  
+  url: jdbc:mysql://localhost:3306/conductor?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false
+  username: conductor
+  password: conductor
 conductor:
   jetty:
     server:
-      port: 1987
+      port: 1988
   mysql:
     connection:
       timeout: 18000000
       idle:
-        timeout: 31536000 
+        timeout: 31536000
       pool:
         idle:
           min: 2
         size:
-          max: 10000
+          max: 1000
 
 zuul:
   add-proxy-headers: true
   add-host-header: true
-  ssl-hostname-validation-enabled: false
   sensitive-headers:
   - Authorization
   routes:
