@@ -51,10 +51,6 @@ logbook:
 
 ## Conductor MYSQL Configuration for Hikari DataSource
 db: mysql
-jdbc:
-  url: jdbc:mysql://${MYSQL_DATABASE_HOST}:${MYSQL_DATABASE_PORT}/${MYSQL_DATABASE}?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false
-  username: ${MYSQL_USER}
-  password: ${MYSQL_PASSWORD}
 conductor:
   jetty:
     server:

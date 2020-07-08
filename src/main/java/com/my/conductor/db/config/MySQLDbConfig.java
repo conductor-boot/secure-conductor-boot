@@ -25,6 +25,8 @@ public class MySQLDbConfig {
 		System.setProperty("jdbc.url", datasourceUrl);
 	    System.setProperty("jdbc.username", datasourceUsername);
 	    System.setProperty("jdbc.password", datasourcePassword);
+	    
+	    System.out.println("~~~~~~~JDBC MYSQL Properties are SET for CONDUCTOR~~~~~~~");
 
         return DataSourceBuilder
                 .create()
