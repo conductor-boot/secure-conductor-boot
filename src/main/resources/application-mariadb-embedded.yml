@@ -74,6 +74,8 @@ jdbc:
   username: ${spring.datasource.username}
   password: ${spring.datasource.password}  
 conductor:
+  startup:
+    default: true
   jetty:
     server:
       port: 1987

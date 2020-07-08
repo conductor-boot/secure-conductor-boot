@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   use-forward-headers: true
   ssl:
     key-store-type: PKCS12
@@ -52,9 +52,11 @@ logbook:
 ## Conductor MYSQL Configuration for Hikari DataSource
 db: mysql
 conductor:
+  startup:
+    default: true
   jetty:
     server:
-      port: 1988
+      port: 1987
   mysql:
     connection:
       timeout: 18000000

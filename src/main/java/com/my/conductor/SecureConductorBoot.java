@@ -1,6 +1,8 @@
 package com.my.conductor;
 
+import org.hibernate.internal.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +24,9 @@ public class SecureConductorBoot {
 	
 	private static String[] args_buffer;
 	
+	@Value("${conductor.startup.default:true}") 
+	private String CONDUCTOR_STARTUP_DEFAULT;
+	
 	@Autowired
 	EnvironmentVariablesToSystemPropertiesMappingConfiguration environmentVariablesToSystemPropertiesMappingConfiguration;
 	
@@ -41,10 +46,13 @@ public class SecureConductorBoot {
 	@EventListener(ApplicationReadyEvent.class)
 	public void startConductorServer() throws InterruptedException {
 		
-		ConductorRunnerThreadProvider conductorRunnerThread = ConductorRunnerThreadProvider.getInstance();
-		
-		conductorRunnerThread.configureArgs(args_buffer);
-		conductorRunnerThread.start();  
+		if(StringHelper.booleanValue(CONDUCTOR_STARTUP_DEFAULT))
+		{
+			ConductorRunnerThreadProvider conductorRunnerThread = ConductorRunnerThreadProvider.getInstance();
+			
+			conductorRunnerThread.configureArgs(args_buffer);
+			conductorRunnerThread.start();  
+		}
 	}
 
 }
