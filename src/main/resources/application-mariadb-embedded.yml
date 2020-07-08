@@ -15,9 +15,9 @@ spring:
   application:
     name: conductor-boot-wrapper-secure
   datasource:
-    name: conductor
-    username: Conductor
-    password: Conductor!23$
+    name: ${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     tomcat:
       test-while-idle: true
