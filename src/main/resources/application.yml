@@ -13,9 +13,6 @@ spring:
      - security
   application:
     name: conductor-boot-wrapper-secure
-  flyway:
-    locations:
-    - classpath:db/migration
   main:
     allow-bean-definition-overriding: true
 

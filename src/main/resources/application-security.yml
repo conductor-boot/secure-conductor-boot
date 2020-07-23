@@ -2,11 +2,7 @@ security:
   oauth2:
     conductor:
       roles: role_conductor_super_manager,role_conductor_super_viewer,role_conductor_core_manager,role_conductor_core_viewer,role_conductor_execution_manager,role_conductor_execution_viewer,role_conductor_event_manager,role_conductor_event_viewer,role_conductor_metadata_manager,role_conductor_metadata_viewer,role_conductor_workflow_manager,role_conductor_workflow_viewer,role_conductor_task_manager,role_conductor_task_viewer
-    client:
-      client-id: OVERALL_SUPER_ADMIN_APP
-      client-secret: password
     resource:
-      token-info-uri: http://${AAASERVER_HOST}:911/oauth/check_token
       mapping: |
         [
           {
