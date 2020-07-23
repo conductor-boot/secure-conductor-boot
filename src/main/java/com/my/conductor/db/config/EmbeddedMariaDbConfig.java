@@ -17,7 +17,7 @@ import ch.vorburger.mariadb4j.springframework.MariaDB4jSpringService;
 @ConditionalOnProperty(
 	    value="wrapper_db", 
 	    havingValue = "mariadb4j", 
-	    matchIfMissing = true)
+	    matchIfMissing = false)
 public class EmbeddedMariaDbConfig {
 	
 	@Value("${mariadb4j.maxConnections:10000}")

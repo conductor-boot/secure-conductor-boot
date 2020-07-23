@@ -35,7 +35,7 @@ public class EmbeddedResourceServerConfiguration extends ResourceServerConfigure
 	@Autowired
 	public TokenStore tokenStore;
 	
-	@Value("${security.oauth2.resource.mapping}")
+	@Value("${api.security.resource.mapping}")
 	private String resourceMapping;
 
 	@Override

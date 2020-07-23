@@ -31,7 +31,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	
 	private Logger logger = LoggerFactory.getLogger(ResourceServerConfiguration.class);
 	
-	@Value("${security.oauth2.resource.mapping}")
+	@Value("${api.security.resource.mapping}")
 	private String resourceMapping;
 
 	@Override

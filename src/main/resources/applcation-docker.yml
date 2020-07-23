@@ -1,26 +1,140 @@
 spring:
-  profiles:
-    active: 
-     - database-default
-     - logbook
-     - mysql
-     - oauth
-     - conductor
-     - zuul
   application:
     name: conductor-boot-wrapper-secure
   main:
     allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://${MYSQL_DATABASE_HOST}:${MYSQL_DATABASE_PORT}/${MYSQL_DATABASE}?createDatabaseIfNotExist=true&autoReconnect=true&verifyServerCertificate=false&useSSL=false
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+    initialization-mode: never
+    platform: mysql
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+      ddl-auto: validate
+  flyway:
+    baseline-on-migrate: true
+    locations:
+    - classpath:db/migration
 
 server:
-  port: 8080
+  port: 2048
   use-forward-headers: true
+  ssl:
+    key-store-type: PKCS12
+# The path to the keystore containing the certificate
+    key-store: classpath:keystore/my.p12
+# The password used to generate the certificate
+    key-store-password: conductor
+# The alias mapped to the certificate
+    key-alias: my
+    enabled: false
 
 check-user-scopes: true
 awaitTermination: 3000
 
-security:
-  oauth2:
+MYSQL_DATABASE: conductor
+MYSQL_USER: conductor
+MYSQL_PASSWORD: conductor
+MYSQL_DATABASE_HOST: localhost
+MYSQL_DATABASE_PORT: 3306
+AAASERVER_HOST: localhost
+AAASERVER_PORT: 1024
+
+wrapper_db: mysql
+db: mysql
+
+conductor:
+  startup:
+    default: true
+  jetty:
+    server:
+      port: 1987
+  mysql:
+    connection:
+      timeout: 18000000
+      idle:
+        timeout: 31536000 
+      pool:
+        idle:
+          min: 2
+        size:
+          max: 10000
+#workflow:
+#  elasticsearch:
+#    instanceType: EXTERNAL
+#    url: http://localhost:9200
+jdbc:
+  username: ${spring.datasource.username}
+  password: ${spring.datasource.password}
+
+logbook:
+  filter:
+    enabled: true
+  write:
+    level: info
+    chunk-size: 10000
+  format:
+    style: splunk
+  exclude: [/actuator/**, /v3/api-docs/**, /swagger-ui/**, /index.html, /images/**, /swagger-ui.js, /lib/**, /css/**, /api/swagger.json]
+  strategy: body-only-if-status-at-least
+  minimum-status: 400
+
+zuul:
+  add-proxy-headers: true
+  add-host-header: true
+  ssl-hostname-validation-enabled: false
+  sensitive-headers:
+  - Authorization
+  routes:
+    conductor-index:
+      path: /
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+    conductor-html:
+      path: /index.html
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+    conductor-swagger-json:
+      path: /api/swagger.json
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+    conductor-swagger-images:
+      path: /images/**
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+    conductor-swagger-lib:
+      path: /lib/**
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+    conductor-swagger-css:
+      path: /css/**
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+    conductor-swagger-js:
+      path: /swagger-ui.js
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+    conductor-api:
+      path: /api/**
+      url: http://localhost:${conductor.jetty.server.port}
+      retryable: true
+      strip-prefix: false
+
+api:
+  security:
     resource:
       mapping: |
         [
@@ -105,3 +219,14 @@ security:
             ]
           }
         ]
+
+oauth:
+  embedded: false
+  
+security:
+  oauth2:
+    client:
+      client-id: OVERALL_SUPER_ADMIN_APP
+      client-secret: password
+    resource:
+      token-info-uri: http://${AAASERVER_HOST}:${AAASERVER_PORT}/oauth/check_token

@@ -7,4 +7,4 @@ server:
     key-store-password: conductor
 # The alias mapped to the certificate
     key-alias: my
-    enabled: true
+    enabled: false
