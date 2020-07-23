@@ -42,9 +42,9 @@ awaitTermination: 3000
 MYSQL_DATABASE: conductor
 MYSQL_USER: conductor
 MYSQL_PASSWORD: conductor
-MYSQL_DATABASE_HOST: localhost
+MYSQL_DATABASE_HOST: mysql_db
 MYSQL_DATABASE_PORT: 3306
-AAASERVER_HOST: localhost
+AAASERVER_HOST: aaaserver
 AAASERVER_PORT: 1024
 
 wrapper_db: mysql
