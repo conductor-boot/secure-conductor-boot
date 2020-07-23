@@ -14,3 +14,7 @@ conductor:
           min: 2
         size:
           max: 10000
+workflow:
+  elasticsearch:
+    instanceType: EXTERNAL
+    url: http://localhost:9200

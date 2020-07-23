@@ -3,8 +3,10 @@ security:
     conductor:
       roles: role_conductor_super_manager,role_conductor_super_viewer,role_conductor_core_manager,role_conductor_core_viewer,role_conductor_execution_manager,role_conductor_execution_viewer,role_conductor_event_manager,role_conductor_event_viewer,role_conductor_metadata_manager,role_conductor_metadata_viewer,role_conductor_workflow_manager,role_conductor_workflow_viewer,role_conductor_task_manager,role_conductor_task_viewer
     client:
-      roles: role_oauth_client_admin
+      client-id: OVERALL_SUPER_ADMIN_APP
+      client-secret: password
     resource:
+      token-info-uri: http://${AAASERVER_HOST}:911/oauth/check_token
       mapping: |
         [
           {
@@ -86,64 +88,5 @@ security:
             "roles": [
               "role_conductor_super_manager", "role_conductor_super_viewer","role_conductor_core_manager", "role_conductor_metadata_manager", "role_conductor_core_viewer", "role_conductor_metadata_viewer"
             ]
-          },
-          {
-            "endpoint": "/oauth/admin/**",
-            "http_methods": [
-            "GET",
-              "POST",
-              "PUT",
-              "PATCH",
-              "DELETE"
-            ],
-            "roles": [
-              "role_oauth_super_admin"
-            ]
-          },
-          {
-            "endpoint": "/oauth/client/**",
-            "http_methods": [
-            "GET",
-              "POST",
-              "PUT",
-              "PATCH",
-              "DELETE"
-            ],
-            "roles": [
-              "role_oauth_client_admin"
-            ]
-          },
-          {
-            "endpoint": "/oauth/user/**",
-            "http_methods": [
-            "GET",
-              "POST",
-              "PUT",
-              "PATCH",
-              "DELETE"
-            ],
-            "roles": [
-              "role_oauth_super_admin", "role_oauth_client_admin", "role_conductor_super_manager", "role_conductor_super_viewer", "role_conductor_core_manager", "role_conductor_core_viewer", "role_conductor_execution_manager", "role_conductor_execution_viewer", "role_conductor_event_manager", "role_conductor_event_viewer", "role_conductor_metadata_manager", "role_conductor_metadata_viewer", "role_conductor_workflow_manager", "role_conductor_workflow_viewer", "role_conductor_task_manager", "role_conductor_task_viewer"
-            ]
-          },
-          {
-            "endpoint": "/oauth/user/principal",
-            "http_methods": [
-              "GET"
-            ],
-            "roles": [
-              "role_oauth_super_admin", "role_oauth_client_admin", "role_conductor_super_manager", "role_conductor_super_viewer", "role_conductor_core_manager", "role_conductor_core_viewer", "role_conductor_execution_manager", "role_conductor_execution_viewer", "role_conductor_event_manager", "role_conductor_event_viewer", "role_conductor_metadata_manager", "role_conductor_metadata_viewer", "role_conductor_workflow_manager", "role_conductor_workflow_viewer", "role_conductor_task_manager", "role_conductor_task_viewer"
-            ]
           }
         ]
-      jwt:
-        key-value: |
-          -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgnEzp25qlRJqe/IWf88o
-          lfkOl9a7tX4wgDrLLzguzMIAHdLv2do1qb48nPJPJYElD6wVTguokOTOND+4oFzJ
-          Oob/t/6cQ65gPCXVo8OfN1jrternBEIu9t2FuSmn/Ica+JvIZ4NJFz1UnxY1fYGv
-          WMjsMwpOZk8uU39Pu8ywyyaRPXYi0Sbk8vj35GjdwkhshBOUaE45JlZpBms6HerY
-          45TBbHTiC9hFQ8slwEd8DIsLYhSlogmCC7hciOVlNEJxUoumq1M20wlizkWhxCyM
-          Q/5OZMLDBzhK7+lgp9M3ZUdJFOgNKbkR/gdktWC4RZxp90t+Ztct6pHoNz5K/0ji
-          ZwIDAQAB
-          -----END PUBLIC KEY-----

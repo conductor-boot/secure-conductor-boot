@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
   
 mariadb4j:
-  port: 3310
+  port: 3306
