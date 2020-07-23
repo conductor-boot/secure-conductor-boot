@@ -2,15 +2,22 @@ spring:
   profiles:
     active: 
      - default
+     - local
      - database-default
      - logbook
      - mariadb-embedded
+     - oauth-embedded
      - conductor
      - ports
      - zuul
      - security
   application:
     name: conductor-boot-wrapper-secure
+  flyway:
+    locations:
+    - classpath:db/migration
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8080

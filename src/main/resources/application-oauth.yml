@@ -1,0 +1,9 @@
+oauth:
+  embedded: false
+security:
+  oauth2:
+    client:
+      client-id: OVERALL_SUPER_ADMIN_APP
+      client-secret: password
+    resource:
+      token-info-uri: http://${AAASERVER_HOST}:911/oauth/check_token

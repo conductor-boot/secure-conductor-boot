@@ -1,0 +1,3 @@
+MYSQL_DATABASE: conductor
+MYSQL_USER: conductor
+MYSQL_PASSWORD: conductor
