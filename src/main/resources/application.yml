@@ -1,24 +1,4 @@
 spring:
   profiles:
     active: 
-     - default
      - local
-     - database-default
-     - logbook
-     - mariadb-embedded
-     - oauth-embedded
-     - conductor
-     - ports
-     - zuul
-     - security
-  application:
-    name: conductor-boot-wrapper-secure
-  main:
-    allow-bean-definition-overriding: true
-
-server:
-  port: 8080
-  use-forward-headers: true
-
-check-user-scopes: true
-awaitTermination: 3000
