@@ -27,8 +27,8 @@ public class MySQLDbConfig {
 	    System.setProperty("jdbc.password", datasourcePassword);
 	    
 	    System.out.println("~~~~~~~JDBC MYSQL Properties are SET for CONDUCTOR~~~~~~~");
-
-        return DataSourceBuilder
+		
+		return DataSourceBuilder
                 .create()
                 .username(datasourceUsername)
                 .password(datasourcePassword)
@@ -36,5 +36,4 @@ public class MySQLDbConfig {
                 .driverClassName(datasourceDriver)
                 .build();
     }
-
 }

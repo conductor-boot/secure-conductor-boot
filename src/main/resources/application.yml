@@ -19,11 +19,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
       ddl-auto: validate
   flyway:
+    validate-on-migrate: true
     baseline-on-migrate: true
     locations:
     - classpath:db/embedded/migration
     - classpath:db/migration
-
+    
 server:
   port: 2048
   use-forward-headers: true
@@ -85,9 +86,6 @@ conductor:
 #  elasticsearch:
 #    instanceType: EXTERNAL
 #    url: http://localhost:9200
-jdbc:
-  username: ${spring.datasource.username}
-  password: ${spring.datasource.password}
 
 logbook:
   filter:

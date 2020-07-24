@@ -19,12 +19,13 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
       ddl-auto: validate
   flyway:
+    validate-on-migrate: true
     baseline-on-migrate: true
     locations:
     - classpath:db/migration
 
 server:
-  port: 2048
+  port: 2049
   use-forward-headers: true
   ssl:
     key-store-type: PKCS12
@@ -66,13 +67,19 @@ conductor:
           min: 2
         size:
           max: 10000
-#workflow:
-#  elasticsearch:
-#    instanceType: EXTERNAL
-#    url: http://localhost:9200
-jdbc:
-  username: ${spring.datasource.username}
-  password: ${spring.datasource.password}
+workflow:
+  elasticsearch:
+    version: 5
+    instanceType: EXTERNAL
+    url: http://localhost:9200
+    cluster:
+      health:
+        color: green
+    index:
+      name: conductor
+    tasklog:
+      index:
+        name: task_log
 
 logbook:
   filter:

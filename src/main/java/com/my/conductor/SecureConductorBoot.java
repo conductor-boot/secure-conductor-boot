@@ -55,5 +55,18 @@ public class SecureConductorBoot {
 			conductorRunnerThread.start();  
 		}
 	}
+	
+	/*
+	 * @Bean public RestClient restClient() { RestClientBuilder builder =
+	 * RestClient.builder( new HttpHost("localhost", 9200))
+	 * .setRequestConfigCallback( new RestClientBuilder.RequestConfigCallback() {
+	 * 
+	 * @Override public RequestConfig.Builder customizeRequestConfig(
+	 * RequestConfig.Builder requestConfigBuilder) { return requestConfigBuilder
+	 * .setConnectTimeout(5000) .setSocketTimeout(60000); }
+	 * }).setMaxRetryTimeoutMillis(60000);
+	 * 
+	 * return builder.build(); }
+	 */
 
 }

@@ -2,6 +2,7 @@ package com.my.conductor.db.config;
 
 import javax.sql.DataSource;
 
+import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -103,7 +104,12 @@ public class EmbeddedMariaDbConfig {
         String databaseUrl = config.getURL(databaseName)+"?autoReconnect=true";
 	    
 	    System.setProperty("jdbc.url", databaseUrl);
-        
+	    System.setProperty("jdbc.username", datasourceUsername);
+	    System.setProperty("jdbc.password", datasourcePassword);
+	    System.setProperty("flyway.validate-on-migrate", "false");
+	    System.setProperty("flyway.baseline-on-migrate", "false");
+	    System.setProperty("flyway.ignore-missing-migrations", "true");
+	    
         return DataSourceBuilder
                 .create()
                 .username(datasourceUsername)
