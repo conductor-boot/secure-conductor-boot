@@ -71,7 +71,7 @@ workflow:
   elasticsearch:
     version: 5
     instanceType: EXTERNAL
-    url: http://localhost:9200
+    url: http://${ES_HOST}:${ES_PORT}
     cluster:
       health:
         color: green
