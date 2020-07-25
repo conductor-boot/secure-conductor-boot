@@ -1,0 +1,12 @@
+server:
+  port: 2048
+  use-forward-headers: true
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:keystore/my.p12
+    key-store-password: conductor
+    key-alias: my
+    enabled: false
+  
+mariadb4j:
+  port: 3310

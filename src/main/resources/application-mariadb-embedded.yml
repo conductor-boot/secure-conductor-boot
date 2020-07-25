@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    name: ${MYSQL_DATABASE}
+
+wrapper_db: mariadb4j
+
+mariadb4j:
+  database:
+    name: ${spring.datasource.name}
+  dataDir: ${spring.application.name}-data
+  libDir: ${spring.application.name}-lib
+  baseDir: ${spring.application.name}-base
+#  dataDir: /appln/db/${spring.application.name}-data
+#  libDir: /appln/db/${spring.application.name}-lib
+#  baseDir: /appln/db/${spring.application.name}-base
+  maxConnections: 100000
+  wait: 
+    timeout: 18000000
+  connect:
+    timeout: 31536000
+  deleteBaseAndDataDirOnShutdown: false
+  security:
+    disabled: true
+
+flyway:
+  validate-on-migrate: false
+  baseline-on-migrate: false
+  ignore-missing-migrations: true
+
+MYSQL_DATABASE: conductor
+MYSQL_USER: conductor
+MYSQL_PASSWORD: conductor

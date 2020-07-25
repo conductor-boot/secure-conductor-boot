@@ -23,8 +23,8 @@ import com.my.conductor.constants.Constants;
 
 @Configuration
 @ConditionalOnProperty(
-	    value="oauth.embedded", 
-	    havingValue = "true", 
+	    value="oauth.security", 
+	    havingValue = "EMBEDDED", 
 	    matchIfMissing = false)
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -144,7 +144,6 @@ public class EmbeddedResourceServerConfiguration extends ResourceServerConfigure
 	}
 		
     http.authorizeRequests()
-    	//.antMatchers("/env").permitAll()
     	.antMatchers(HttpMethod.GET, "/**").permitAll()
     	.anyRequest().authenticated()
 		.and().cors().disable().csrf().disable().httpBasic().disable()

@@ -27,8 +27,8 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 @Configuration
 @ConditionalOnProperty(
-	    value="oauth.embedded", 
-	    havingValue = "true", 
+	    value="oauth.security", 
+	    havingValue = "EMBEDDED", 
 	    matchIfMissing = false)
 @EnableAuthorizationServer
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {

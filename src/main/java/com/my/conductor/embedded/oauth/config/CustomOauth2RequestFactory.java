@@ -3,6 +3,7 @@ package com.my.conductor.embedded.oauth.config;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +14,10 @@ import org.springframework.security.oauth2.provider.TokenRequest;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
+@ConditionalOnProperty(
+	    value="oauth.security", 
+	    havingValue = "EMBEDDED", 
+	    matchIfMissing = false)
 public class CustomOauth2RequestFactory extends DefaultOAuth2RequestFactory {
 	
 	@Autowired

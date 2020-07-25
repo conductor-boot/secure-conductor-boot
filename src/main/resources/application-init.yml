@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: conductor-boot-wrapper-secure
+  main:
+    allow-bean-definition-overriding: true
+  flyway:
+    validate-on-migrate: true
+    baseline-on-migrate: true
+    locations:
+    - classpath:db/embedded/migration
+    - classpath:db/migration
+
+check-user-scopes: true
+awaitTermination: 3000

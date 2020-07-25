@@ -16,8 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @ConditionalOnProperty(
-	    value="oauth.embedded", 
-	    havingValue = "true", 
+	    value="oauth.security", 
+	    havingValue = "EMBEDDED", 
 	    matchIfMissing = false)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 

@@ -1,0 +1,13 @@
+workflow:
+  elasticsearch:
+    cluster:
+      health:
+        color: yellow
+    version: 5
+    instanceType: EXTERNAL
+    url: http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
+    index:
+      name: conductor
+    tasklog:
+      index:
+        name: task_log

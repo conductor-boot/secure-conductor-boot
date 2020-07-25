@@ -13,8 +13,8 @@ import com.my.conductor.embedded.oauth.db.repositories.UserRepository;
 
 @Service(value = "userDetailsService")
 @ConditionalOnProperty(
-	    value="oauth.embedded", 
-	    havingValue = "true", 
+	    value="oauth.security", 
+	    havingValue = "EMBEDDED", 
 	    matchIfMissing = false)
 public class CustomUserDetailsService implements UserDetailsService {
 

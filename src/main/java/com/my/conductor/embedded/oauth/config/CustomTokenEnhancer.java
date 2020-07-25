@@ -3,6 +3,7 @@ package com.my.conductor.embedded.oauth.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -10,6 +11,10 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 import com.my.conductor.embedded.oauth.db.entity.User;
 
+@ConditionalOnProperty(
+	    value="oauth.security", 
+	    havingValue = "EMBEDDED", 
+	    matchIfMissing = false)
 public class CustomTokenEnhancer extends JwtAccessTokenConverter {
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {

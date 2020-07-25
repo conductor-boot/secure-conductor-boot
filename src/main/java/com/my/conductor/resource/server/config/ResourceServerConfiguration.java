@@ -23,9 +23,9 @@ import com.my.conductor.constants.Constants;
 @Configuration
 @EnableResourceServer
 @ConditionalOnProperty(
-	    value="oauth.embedded", 
-	    havingValue = "false", 
-	    matchIfMissing = true)
+	    value="oauth.security", 
+	    havingValue = "EXTERNAL", 
+	    matchIfMissing = false)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 	
@@ -140,7 +140,6 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	}
 		
     http.authorizeRequests()
-    	//.antMatchers("/env").permitAll()
     	.antMatchers(HttpMethod.GET, "/**").permitAll()
     	.anyRequest().authenticated()
 		.and().cors().disable().csrf().disable().httpBasic().disable()
