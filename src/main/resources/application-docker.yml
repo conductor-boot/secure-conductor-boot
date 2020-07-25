@@ -25,7 +25,7 @@ spring:
     - classpath:db/migration
 
 server:
-  port: 2049
+  port: 2048
   use-forward-headers: true
   ssl:
     key-store-type: PKCS12
