@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.env.OriginTrackedMapPropertySource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,12 @@ public class EnvironmentVariablesToSystemPropertiesMappingConfiguration {
 
 	@Autowired
 	ApplicationContext ctx;
+	
+	@Value("${ELASTICSEARCH_HOST:elasticsearch}")
+	private String ELASTICSEARCH_HOST;
+	
+	@Value("${ELASTICSEARCH_PORT:0}")
+	private int ELASTICSEARCH_PORT;
 
 	public void mapEnvToProp() {
 
@@ -39,6 +46,16 @@ public class EnvironmentVariablesToSystemPropertiesMappingConfiguration {
 		props.forEach((type, value) -> {
 			System.setProperty(String.valueOf(type), String.valueOf(value));
 		});
+		
+		if(ELASTICSEARCH_PORT > 0)
+		{
+			String url = "http://"+ELASTICSEARCH_HOST+":"+ELASTICSEARCH_PORT;
+			
+			System.setProperty("workflow.elasticsearch.url", url);
+			
+			System.out.println("~~~~~~~~~~~~ES URL SET FOR CONDUCTOR - EXTERNAL~~~~~~~~~~");
+		}
+		
 	}
 
 }

@@ -47,6 +47,8 @@ MYSQL_DATABASE_HOST: mysql_db
 MYSQL_DATABASE_PORT: 3306
 AAASERVER_HOST: aaaserver
 AAASERVER_PORT: 1024
+ELASTICSEARCH_HOST: localhost
+ELASTICSEARCH_PORT: 0
 
 wrapper_db: mysql
 db: mysql
@@ -71,16 +73,13 @@ workflow:
   elasticsearch:
     version: 5
     instanceType: EXTERNAL
-    url: http://${ES_HOST}:${ES_PORT}
-    cluster:
-      health:
-        color: green
+    url: http://localhost:9200
     index:
       name: conductor
     tasklog:
       index:
         name: task_log
-
+        
 logbook:
   filter:
     enabled: true
